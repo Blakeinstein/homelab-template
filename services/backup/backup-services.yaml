@@ -1,0 +1,37 @@
+# backup-services.yaml — the single source of truth for WHAT is backed up,
+# WHEN, and HOW. The homelab-backup agent (github.com/Blakeinstein/homelab-backup)
+# reads this file, expands $VARS from its own .env, generates systemd user
+# timers from the cron schedules, and serves a status dashboard.
+#
+# Procedure types:
+#   postgres_dump — live dump via `podman exec <container> pg_dumpall`,
+#                   piped into restic via stdin (no stopping the service)
+#   files         — restic snapshot of one or more paths
+#
+# Cron fields: min hour dom mon dow
+
+defaults:
+  restic_repo: $HOMELAB_BACKUP_STATE/restic
+  retention:
+    keep_daily: 7
+    keep_weekly: 4
+
+# Optional offsite push of the restic repo via rsync. Host/path come from
+# OFFSITE_HOST / OFFSITE_PATH in homelab-backup.env (empty = disabled).
+offsite:
+  enabled: true
+  ssh_user: ""
+  flags: "-az --partial --delete --info=stats1"
+
+services:
+  example:
+    env_file: $HOMELAB_CONTAINER_BASE_DIR/example/example.env
+    procedures:
+      - id: data
+        type: files
+        paths:
+          - $HOMELAB_DATA_ROOT/example/data
+        schedule: "0 2 * * *"
+
+# Real-world reference procedures (postgresql + uploads + rails storage),
+# see https://github.com/Blakeinstein/homelab-backup#running-backups

@@ -1,0 +1,17 @@
+# Will be first-booted lazily the way the agent needs it, but declared here
+# so the backup service knows about the service.
+# See ../backup/backup-services.yaml for the written backup procedure.
+
+[Unit]
+Description=Example service (leaflet/uptime/anything)
+
+[Container]
+ContainerName=example
+Image=docker.io/library/redis:7-alpine
+PublishPort=6379:6379
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
