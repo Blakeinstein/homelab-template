@@ -1,0 +1,15 @@
+# Optional. Read by Homeio (https://github.com/doctor-io/homeio) when
+# QUADLET_SERVICES_ROOT points at this repo's services/ folder: Homeio
+# discovers every folder with a *.container unit and uses this file, if
+# present, to label it on the dashboard instead of a generic container tile.
+# All fields are optional — delete anything you don't need.
+
+name: Example                # display name; defaults to the folder name
+icon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/redis.png
+description: Minimal quadlet unit to copy from
+category: Development
+port: 6379                   # overrides the auto-detected published port
+                              # (this example has no web UI; a real service
+                              # would point this at its own http(s) port)
+primaryContainer: example    # which unit's container represents the app as a
+                              # whole when a service has more than one

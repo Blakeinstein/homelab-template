@@ -1,6 +1,7 @@
 # Will be first-booted lazily the way the agent needs it, but declared here
 # so the backup service knows about the service.
-# See ../backup/backup-services.yaml for the written backup procedure.
+# See ../homelab-backup/backup-services.yaml for the written backup procedure,
+# and ./app.yaml for how this service is labeled on a Homeio dashboard.
 
 [Unit]
 Description=Example service (leaflet/uptime/anything)
