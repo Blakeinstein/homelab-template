@@ -24,6 +24,10 @@ offsite:
   flags: "-az --partial --delete --info=stats1"
 
 services:
+  # Optional per-service logo override (any image path readable by the agent):
+  #   logo: /srv/homelab-data/<svc>/logo.png
+  # Built-ins are embedded for searxng, sparkyfitness, openwebui, sure.
+
   example:
     env_file: $HOMELAB_CONTAINER_BASE_DIR/example/example.env
     procedures:
