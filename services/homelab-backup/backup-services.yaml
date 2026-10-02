@@ -24,8 +24,10 @@ offsite:
   flags: "-az --partial --delete --info=stats1"
 
 services:
-  # Optional per-service logo override (any image path readable by the agent):
-  #   logo: /srv/homelab-data/<svc>/logo.png
+  # Optional per-service logo override: direct URL or local path
+  #   logo: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/example.png
+  # When unset, the service's app.yaml `icon:` (Homeio's field) is used —
+  # define the icon once, both dashboards honor it.
   # Built-ins are embedded for searxng, sparkyfitness, openwebui, sure.
 
   example:
